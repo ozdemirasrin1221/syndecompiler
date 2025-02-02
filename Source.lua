@@ -1,5 +1,5 @@
-local SynVersion = 'Synapse X '.._VERSION..' '..game:GetService("HttpService"):JSONDecode(syn.request({Url = 'http://httpbin.org/post', Method = 'POST', Headers = {['Content-Type'] = 'application/json'}}).Body).headers['User-Agent']
-local Configs = getgenv().SynDecompilerConfigs
+--local SynVersion = 'Synapse X '.._VERSION..' '..game:GetService("HttpService"):JSONDecode(syn.request({Url = 'http://httpbin.org/post', Method = 'POST', Headers = {['Content-Type'] = 'application/json'}}).Body).headers['User-Agent']
+--local Configs = getgenv().SynDecompilerConfigs
 local SynDecompile = assert(getgenv().decompile)
 
 getgenv().decompile = (function(Path, ...)
@@ -18,7 +18,7 @@ getgenv().decompile = (function(Path, ...)
 		until Output or Tick == Configs.DecompilerTimeout
 
 		if Output and Output:len() > 0 then
-			Output = Output:gsub('Synapse X Luau', SynVersion)
+			Output = Output:gsub('Synapse X Luau', 5)
 			Output = Output:gsub('l__', '')
 			Output = Output:gsub(';', '; \n')
 			Output = Output:gsub('\n\nlocal', '\nlocal')
@@ -55,32 +55,32 @@ getgenv().decompile = (function(Path, ...)
 			end
 
 			if #DefinedVariables > 0 then
-				local Split = Output:split('-- Decompiled with the '..SynVersion..' decompiler.')[2]
+				local Split = Output:split('-- Output = Decompiled with the Synapse X Luau decompiler.\n\n')[2]
 
 				for _, DefinedVariable in pairs(DefinedVariables) do
 					VariableMsg = VariableMsg..'\n'..DefinedVariable
 				end
 
-				Output = '-- Decompiled with the '..SynVersion..' decompiler.\n\n'..VariableMsg..Split
+				Output = '-- Decompiled with the Synapse X Luau decompiler.\n\n'..VariableMsg..Split
 			end
 
 			if #DefinedConstants > 0 then
-				local Split = Output:split('-- Decompiled with the '..SynVersion..' decompiler.')[2]
+				local Split = Output:split('-- Decompiled with the Synapse X Luau decompiler.')[2]
 
 				for _, DefinedVariable in pairs(DefinedConstants) do
 					ConstantMsg = ConstantMsg..'\n'..DefinedVariable
 				end
 
-				Output = '-- Decompiled with the '..SynVersion..' decompiler.\n\n'..ConstantMsg..Split
+				Output = '-- Decompiled with the Synapse X Luau decompiler.\n\n'..ConstantMsg..Split
 			end
 
 			if Output:find('bytecode') then
-				Output = '--'..SynVersion..'\n--No bytecode was found (most likely a Synapse X generated script or script the is empty).'
+				--Output = '--'..SynVersion..'\n--No bytecode was found (most likely a Synapse X generated script or script the is empty).'
 			end
 		elseif Tick == Configs.DecompilerTimeout then
-			Output = '--'..SynVersion..'\n--Exceeded decompiler timeout.'
+			--Output = '--'..SynVersion..'\n--Exceeded decompiler timeout.'
 		else
-			Output = '--'..SynVersion..'\n--No bytecode was found (this script most likely contains a anti-decompiler).'
+			--Output = '--'..SynVersion..'\n--No bytecode was found (this script most likely contains a anti-decompiler).'
 		end
 
 		return Output
