@@ -1,6 +1,6 @@
 local SynVersion = ""
 --local Configs = getgenv().SynDecompilerConfigs
-local SynDecompile = assert(getgenv().decompile)
+local SynDecompile = nil  --assert(getgenv().decompile)
 
 getgenv().decompile = (function(Path, ...)
 	if typeof(Path) == 'Instance' and Path.ClassName:find('Script') then
