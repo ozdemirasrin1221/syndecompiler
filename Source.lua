@@ -3,6 +3,7 @@ local SynVersion = ""
 local SynDecompile = nil  --assert(getgenv().decompile)
 
 getgenv().decompile = (function(Path, ...)
+	SynDecompile = assert(getgenv().decompile)
 	if typeof(Path) == 'Instance' and Path.ClassName:find('Script') then
 		local Output 
 
